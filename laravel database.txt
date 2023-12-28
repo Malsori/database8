@@ -1,0 +1,23 @@
+Database laravel
+
+ public $guarded=[];
+    use HasFactory;//In Todo.php
+
+-php artisan migrate
+  -php artisan tinker
+	App\Models\Todo::create(['title'=>'testi','is_completed'=>'1',])
+	App\Models\Todo::find(2)//to find in database like WHERE mostly works with id
+
+ 	App\Models\Todo::all()//I tregon te gjitha te dhenat
+
+
+
+ public function up(): void
+    {
+        Schema::create('todos', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->boolean('is_completed')->default(0);
+            $table->timestamps();
+        });
+    }//create table
