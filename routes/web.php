@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\viewController;
+use App\Http\Controllers\CreateController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,11 @@ Route::get('/', function () {
 });
 
 Route::get('/viewfile', [viewController::class,'getData']);
+
+Route::match(['get','post'],'/create',[CreateController::class,'create'])->name('create');
+
+// Route::resource('todos',viewController::class);
+Route::resource('todos',CreateController::class);
+
+
+

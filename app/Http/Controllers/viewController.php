@@ -9,6 +9,6 @@ class viewController extends Controller
 {
     public function getData() {
         $data = Todo::all();
-        return view('viewfile', ['data' => $data]);
+        return view('todos.viewfile', ['data' => $data]);
     }
 }
