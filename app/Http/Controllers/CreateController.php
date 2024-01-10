@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Todo;
+use Illuminate\Support\Facades\DB;
 
 class CreateController extends Controller
 {
@@ -12,8 +13,15 @@ class CreateController extends Controller
      */
     public function index()
     {
-        $data = Todo::all();
-        return view('todos.viewfile', ['data' => $data]);
+      
+         // $todos=DB::table('todos')->where('title','First data')->get();
+
+        // $todos=DB::table('todos')->get();
+        $todos=Todo::get();
+        // $todos=Todo::paginate(10);
+       
+        return view('todos.viewfile', ['todos' => $todos]);
+       
     }
 
     /**
