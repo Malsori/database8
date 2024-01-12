@@ -89,16 +89,32 @@ table
                 <tr>
                     <td>{{ $todo ->id }}</td>
                     <td>{{ $todo->title }}</td>
-                    <td>{{ $todo->is_completed }}</td>
+                    <td>  @if($todo->is_completed == 1)
+                        <span class="badge badge-sm bg-success">Completed</span>
+                    @else
+                    <span class="badge badge-sm bg-info">Open</span>
+                    @endif
+                    </td>
                 </tr> 
                 @endforeach
+                
             </table>
+            {{ $todos->links() }}
         @else
             <div class="alert alert-info">
                 Todo list eshte e zbrazet!
             </div>
         @endif
     </div>
+
+
+<ul>
+        <li>Open tasks:{{ $open_todos }}</li>
+        <li>Completed tasks:{{  $completed_todos }}</li>
+
+
+</ul>
+ 
     
 </body>
 </html>

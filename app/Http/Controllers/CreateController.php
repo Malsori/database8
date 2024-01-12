@@ -17,10 +17,20 @@ class CreateController extends Controller
          // $todos=DB::table('todos')->where('title','First data')->get();
 
         // $todos=DB::table('todos')->get();
-        $todos=Todo::get();
-        // $todos=Todo::paginate(10);
+        // $todos=Todo::get();
+        $todos=Todo::paginate(10);
+        $open_todos=Todo::where('is_completed',0)->count();
+        $completed_todos=Todo::where('is_completed',1)->count();
+
        
-        return view('todos.viewfile', ['todos' => $todos]);
+        return view('todos.viewfile', 
+        [
+            'todos' => $todos,
+            'open_todos'=>$open_todos,
+            'completed_todos'=>$completed_todos
+
+
+        ]);
        
     }
 
@@ -42,12 +52,25 @@ class CreateController extends Controller
             'is_completed' => 'nullable|boolean',
         ]);
 
-        Todo::create([
-            'title' => $request->input('title'),
-            'is_completed' => $request->input('is_completed', false),
-        ]);
+        // Todo::create([
+        //     'title' => $request->input('title'),
+        //     'is_completed' => $request->input('is_completed', false),
+        // ]);
 
-        return redirect()->route('todos.index')->with('success', 'Todo created successfully');
+        // return redirect()->route('todos.index')->with('success', 'Todo created successfully');
+
+        $data['title']=$request['title'];
+        $data['is_completed']=($request['is_completed']==1)? 1:0;
+
+        if(Todo::create($data))
+        {
+            return redirect()->route('index')->with('status','Todo eshte krijuar me sukses');
+
+        }
+        else
+        {
+            return redirect()->back()->with('status','Todo nuk  eshte krijuar');
+        }
     }
 
     /**

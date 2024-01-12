@@ -16,16 +16,16 @@ use App\Http\Controllers\CreateController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', [CreateController::class,'index']);
+// Route::get('/', [CreateController::class,'index']);
 
 Route::match(['get','post'],'/create',[CreateController::class,'create'])->name('create');
 
 // Route::resource('todos',viewController::class);
-Route::resource('todos',CreateController::class);
+Route::resource('',CreateController::class);
 
 
 
