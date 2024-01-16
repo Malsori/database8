@@ -26,6 +26,13 @@ Route::match(['get','post'],'/create',[CreateController::class,'create'])->name(
 
 // Route::resource('todos',viewController::class);
 Route::resource('',CreateController::class);
+Route::match(['get','put'],'{id}/edit', [CreateController::class, 'edit'])->name('edit');
+
+Route::match(['get','put'],'{id}/update', [CreateController::class, 'update'])->name('update');
+
+Route::get('/todos/{id}', [CreateController::class, 'destroy'])->name('delete');
+
+
 
 
 

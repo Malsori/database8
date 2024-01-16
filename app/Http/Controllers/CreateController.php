@@ -86,15 +86,24 @@ class CreateController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        return view('todos.edit', compact('todo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,int $id)
     {
-        //
+        // dd($request->all(), $id);
+      
+    $todo = Todo::findOrFail($id);
+    $todo->title = $request->input('title');
+    $todo->is_completed = $request->has('is_completed');
+    $todo->save();
+
+    return redirect()->back()->with('success', 'Todo updated successfully');
+    // return view('todos.viewfile');
     }
 
     /**
@@ -102,6 +111,9 @@ class CreateController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
+    
+        return redirect()->back()->with('success', 'Todo deleted successfully');
     }
 }

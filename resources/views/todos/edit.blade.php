@@ -7,6 +7,20 @@
     <title>Edit page</title>
 </head>
 <body>
+    <form method="POST" action="{{ route('update', ['id' => $todo->id]) }}">
+        @csrf
+        @method('PUT')
+        {{-- <input type="text" name="id" value="{{ $todo->id }}"> --}}
+        <label for="title">Title:</label>
+        <input type="text"id="title" name="title" value="{{ $todo->title }}">
+        <br>
+        <label for="is_completed">Status:</label>
+        <input type="checkbox" id="is_completed" name="is_completed" {{ $todo->is_completed ? 'checked' : '' }}>
+        
+     
+        <button type="submit">Update</button><br>
+        <a href="{{ route('index')}}">Go back</a>
+    </form>
     
 </body>
 </html>
