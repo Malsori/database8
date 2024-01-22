@@ -22,7 +22,7 @@ use App\Http\Controllers\CreateController;
 
 // Route::get('/', [CreateController::class,'index']);
 
-Route::match(['get','post'],'/create',[CreateController::class,'create'])->name('create');
+// Route::match(['get','post'],'/create',[CreateController::class,'create'])->name('create');
 
 // Route::resource('todos',viewController::class);
 Route::resource('',CreateController::class);

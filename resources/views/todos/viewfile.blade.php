@@ -107,7 +107,7 @@ table
                 <tr>
                     <td>{{ $todo ->id }}</td>
                     <td>{{ $todo->title }}</td>
-                    <td>  @if($todo->is_completed == 1)
+                    <td>  @if($todo->is_completed)
                         <span class="badge badge-sm bg-success">Completed</span>
                     @else
                     <span class="badge badge-sm bg-info">Open</span>
