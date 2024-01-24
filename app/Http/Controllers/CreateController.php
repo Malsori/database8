@@ -67,10 +67,7 @@ class CreateController extends Controller
             return redirect()->route('index')->with('status','Todo eshte krijuar me sukses');
 
         }
-        else
-        {
-            return redirect()->back()->with('status','Todo nuk  eshte krijuar');
-        }
+        
     }
 
     /**

@@ -14,8 +14,8 @@
 </head>
 <body>
     <div class="container my-4">
-        @if($errors->any)
-            @foreach($errors->all as $error)
+        @if($errors->any())
+            @foreach($errors->all() as $error)
                 <p>{{ $error}}</p>
             @endforeach
         @endif

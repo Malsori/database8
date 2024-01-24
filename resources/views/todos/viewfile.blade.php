@@ -93,6 +93,10 @@ table
     </style>
 </head>
 <body>
+    @if(session('status'))
+        <p style="margin-left: 6%;" class="text-success mt-2">{{ session('status')  }}</p>
+        
+    @endif
     <div class="container my-4">
         @if(count($todos))
             <table class="table table-bordered">
