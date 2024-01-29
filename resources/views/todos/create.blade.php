@@ -19,7 +19,7 @@
                 <p>{{ $error}}</p>
             @endforeach
         @endif
-        <form action="{{ route('store')}}" method="POST">
+        <form action="{{ route('todos.store')}}" method="POST">
             {{-- <form method="post"> --}}
             @csrf
             <input type="text" name="title" value="{{ old('title') }}" class="form-control">

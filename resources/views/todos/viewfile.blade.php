@@ -1,66 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Viewfile</title>
-
-    <style>
-table,tr,td
-{
-    border:2px solid black;
-    border-collapse:collapse;
-}
-table tr
-{
-    height: 30px;
-}
-table
-{
-    width: 1000px;
-    height: auto;
-}
-
-
-    </style>
-</head>
-<body>
-<table>
-    @if(count($todos))
-
-        <tr>
-            <td>Id</td>
-            <td>Title</td>
-            <td>Completed</td>
-        </tr>
-        @foreach ($todos as $item)
-    <tr>
-        <td>{{ $item->id}} </td>
-        <td>{{ $item->title }} </td>
-    
-            <td>
-                @if($item->is_completed == 0)
-                    Not completed
-                @else
-                    Completed
-                @endif
-        
-            </td>
-        
-        </tr>
-       
-
-    @endforeach
-
-    @else
-    There is no data 
-    @endif
-</table>
-
-</body>
-</html> --}}
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -117,9 +54,18 @@ table
                     <span class="badge badge-sm bg-info">Open</span>
                     @endif
                     </td>
-                    <td><a class="update-todo"href="{{ route('edit', ['id' => $todo->id]) }}">Update</a></td>
+                    <td>   
+                        <a href="{{route('todos.edit',['todo' => $todo->id]) }}" class="btn btn-sm btn-primary">Edit</a>
+                    
+                        <a href="{{ route('todos.show', ['todo' => $todo->id]) }}" class="btn btn-sm btn-primary">Preview</a></td>
 
-                    <td><a class="delete-todo" href="{{ route('delete', ['id' => $todo->id]) }}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a></td>
+
+                    <td><form action="{{ route('todos.destroy', ['todo' => $todo->id]) }}" method="POST" onsubmit="return confirm('A jeni i sigurt!')" class="d-inline">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
                     
 
                 </tr> 

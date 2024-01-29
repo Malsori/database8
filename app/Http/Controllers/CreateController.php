@@ -75,7 +75,8 @@ class CreateController extends Controller
      */
     public function show(string $id)
     {
-       
+        $todo = Todo::findOrFail($id);
+        return view('todos.show')->with('todo',$todo);
     }
 
     /**
@@ -84,7 +85,7 @@ class CreateController extends Controller
     public function edit(string $id)
     {
         $todo = Todo::findOrFail($id);
-        return view('todos.edit', compact('todo'));
+        return view('todos.edit')->with('todo',$todo);
     }
 
     /**
@@ -94,13 +95,30 @@ class CreateController extends Controller
     {
         // dd($request->all(), $id);
       
-    $todo = Todo::findOrFail($id);
-    $todo->title = $request->input('title');
-    $todo->is_completed = $request->has('is_completed');
-    $todo->save();
+    // $todo = Todo::findOrFail($id);
+    // $todo->title = $request->input('title');
+    // $todo->is_completed = $request->has('is_completed');
+    // $todo->save();
 
-    return redirect()->back()->with('success', 'Todo updated successfully');
-    // return view('todos.viewfile');
+    // return redirect()->back()->with('success', 'Todo updated successfully');
+    $request->validate(
+        [
+            'title'=>'required'
+        ]
+        );
+        $todo=Todo::find($id);
+        $data['title']=$request['title'];
+        $data['is_completed']=($request['completed']==1) ? 1:0;
+        if($todo->update($data))
+        {
+            return redirect()->route('todos.index')->with('status','Todo eshte ndryshuar me sukses');
+
+        }
+        else
+        {
+            return redirect()->back()->with('status','Diqka eshte gabim');
+
+        }
     }
 
     /**
@@ -109,8 +127,16 @@ class CreateController extends Controller
     public function destroy(string $id)
     {
         $todo = Todo::findOrFail($id);
-        $todo->delete();
+        // $todo->delete();
     
-        return redirect()->back()->with('success', 'Todo deleted successfully');
+        // return redirect()->back()->with('success', 'Todo deleted successfully');
+        if($todo->delete())
+        {
+            return redirect()->route('todos.index')->with('status','Todo eshte fshire me sukses');
+        }
+        else
+        {
+            return redirect()->back()->with('status','Diqka eshte gabim ne fshirjen e Todo');
+        }
     }
 }
